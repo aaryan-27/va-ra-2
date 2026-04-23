@@ -1,8 +1,11 @@
 "use client";
 
-import { BookOpen, Search, Filter } from "lucide-react";
+import { BookOpen, Search, Filter, Star, ArrowRight } from "lucide-react";
+import data from "../../data/journals.json";
 
 export default function Journals() {
+  const journals = data.journals;
+
   return (
     <div className="min-h-screen pt-24">
       <section className="relative section-padding pb-16">
@@ -38,6 +41,9 @@ export default function Journals() {
                   <option value="all" className="bg-vara-800 text-white">
                     All Categories
                   </option>
+                  {Array.from(new Set(journals.map(j => j.category))).map(cat => (
+                    <option key={cat} value={cat} className="bg-vara-800 text-white">{cat}</option>
+                  ))}
                 </select>
               </div>
             </div>
@@ -47,12 +53,38 @@ export default function Journals() {
 
       <section className="section-container pb-24">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-in fade-in duration-1000 delay-300">
-          {[1, 2, 3, 4, 5, 6].map((i) => (
-            <div key={i} className="glass-card p-6 animate-pulse">
-              <div className="h-3 rounded-t-2xl bg-white/5 mb-6"></div>
-              <div className="h-6 bg-white/5 rounded mb-3 w-3/4"></div>
-              <div className="h-4 bg-white/5 rounded mb-2"></div>
-              <div className="h-4 bg-white/5 rounded w-2/3"></div>
+          {journals.map((journal) => (
+            <div key={journal.id} className="glass-card p-6 flex flex-col h-full hover:-translate-y-1 transition-transform duration-300 group">
+              <div className="flex items-start justify-between mb-4">
+                <span className="px-3 py-1 rounded-full text-xs font-medium bg-purple-500/10 text-purple-400 border border-purple-500/20">
+                  {journal.category}
+                </span>
+                {journal.featured && (
+                  <span className="px-3 py-1 rounded-full text-[10px] font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center gap-1 uppercase tracking-wider">
+                    <Star className="w-3 h-3 fill-current" /> Featured
+                  </span>
+                )}
+              </div>
+              <h3 className="text-xl font-display font-bold text-white mb-2 line-clamp-2">
+                {journal.name}
+              </h3>
+              <p className="text-sm text-slate-400 mb-4 line-clamp-3 flex-1">
+                {journal.description}
+              </p>
+              
+              <div className="flex flex-col gap-1 text-xs text-slate-500 mb-6">
+                {journal.issn && <span><strong>ISSN:</strong> {journal.issn}</span>}
+                {journal.impactFactor && <span><strong>IF:</strong> {journal.impactFactor}</span>}
+              </div>
+              
+              <a
+                href={journal.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-auto inline-flex items-center gap-2 text-sm font-medium text-purple-400 hover:text-purple-300 transition-colors group-hover:underline"
+              >
+                Visit Journal Website <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </a>
             </div>
           ))}
         </div>

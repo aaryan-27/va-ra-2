@@ -1,8 +1,11 @@
 "use client";
 
-import { Calendar, Search } from "lucide-react";
+import { Calendar, Search, MapPin, ExternalLink, Star } from "lucide-react";
+import data from "../../data/conferences.json";
 
 export default function Conferences() {
+  const conferences = data.conferences;
+
   return (
     <div className="min-h-screen pt-24">
       <section className="relative section-padding pb-16">
@@ -53,11 +56,48 @@ export default function Conferences() {
 
       <section className="section-container pb-24">
         <div className="space-y-6 animate-in fade-in duration-1000 delay-300">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="glass-card p-8 animate-pulse">
-              <div className="h-6 bg-white/5 rounded w-1/3 mb-4"></div>
-              <div className="h-4 bg-white/5 rounded w-2/3 mb-2"></div>
-              <div className="h-4 bg-white/5 rounded w-1/2"></div>
+          {conferences.map((conf) => (
+            <div key={conf.id} className="glass-card p-8 group hover:-translate-y-1 transition-transform duration-300">
+              <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-4">
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className={`px-3 py-1 rounded-full text-xs font-medium border ${conf.status === 'upcoming' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : conf.status === 'ongoing' ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' : 'bg-slate-500/10 text-slate-400 border-slate-500/20'}`}>
+                      {conf.status.charAt(0).toUpperCase() + conf.status.slice(1)}
+                    </span>
+                    {conf.featured && (
+                      <span className="px-3 py-1 rounded-full text-[10px] font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center gap-1 uppercase tracking-wider">
+                        <Star className="w-3 h-3 fill-current" /> Featured
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="text-2xl font-display font-bold text-white mb-2">{conf.title}</h3>
+                  <p className="text-slate-400 mb-4">{conf.description}</p>
+                </div>
+                
+                <div className="md:text-right shrink-0">
+                  <div className="inline-flex flex-col gap-1 items-start md:items-end p-4 rounded-xl bg-white/5 border border-white/10">
+                    <div className="flex items-center gap-2 text-sm text-white font-medium">
+                      <Calendar className="w-4 h-4 text-emerald-400" />
+                      {new Date(conf.startDate).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
+                    </div>
+                    <div className="flex items-center gap-2 text-xs text-slate-400">
+                      <MapPin className="w-3.5 h-3.5" />
+                      {conf.location}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-4 text-sm text-slate-400 pt-4 border-t border-white/10 mt-4">
+                <div className="flex items-center gap-2">
+                   <strong>Venue:</strong> {conf.venue}
+                </div>
+                {conf.website && (
+                  <a href={conf.website} target="_blank" rel="noopener noreferrer" className="ml-auto inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors">
+                    Visit Website <ExternalLink className="w-4 h-4" />
+                  </a>
+                )}
+              </div>
             </div>
           ))}
         </div>

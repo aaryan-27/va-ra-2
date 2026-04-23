@@ -1,8 +1,11 @@
 "use client";
 
-import { Newspaper, Search } from "lucide-react";
+import { Newspaper, Search, ArrowRight } from "lucide-react";
+import data from "../../data/news.json";
 
 export default function News() {
+  const newsItems = data.news;
+
   return (
     <div className="min-h-screen pt-24">
       <section className="relative section-padding pb-16">
@@ -44,12 +47,33 @@ export default function News() {
 
       <section className="section-container pb-24">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-in fade-in duration-1000 delay-300">
-          {[1, 2, 3, 4, 5, 6].map((i) => (
-            <div key={i} className="glass-card p-6 animate-pulse">
-              <div className="h-4 bg-white/5 rounded w-1/4 mb-4"></div>
-              <div className="h-6 bg-white/5 rounded w-3/4 mb-3"></div>
-              <div className="h-4 bg-white/5 rounded mb-2"></div>
-              <div className="h-4 bg-white/5 rounded w-2/3"></div>
+          {newsItems.map((item) => (
+            <div key={item.id} className="glass-card p-6 flex flex-col h-full hover:-translate-y-1 transition-transform duration-300 group">
+              <div className="flex items-center gap-2 mb-4">
+                <span className="px-3 py-1 rounded-full text-xs font-medium bg-rose-500/10 text-rose-400 border border-rose-500/20">
+                  {item.category || "Announcement"}
+                </span>
+                <span className="text-xs text-slate-500">
+                  {new Date(item.createdAt).toLocaleDateString(undefined, {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                  })}
+                </span>
+              </div>
+              <h3 className="text-xl font-display font-bold text-white mb-2 line-clamp-2">
+                {item.title}
+              </h3>
+              <p className="text-sm text-slate-400 mb-4 line-clamp-3 flex-1">
+                {item.excerpt || item.content.replace(/<[^>]+>/g, '').substring(0, 150) + "..."}
+              </p>
+              
+              <a
+                href="#"
+                className="mt-auto inline-flex items-center gap-2 text-sm font-medium text-rose-400 hover:text-rose-300 transition-colors group-hover:underline"
+              >
+                Read More <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </a>
             </div>
           ))}
         </div>
