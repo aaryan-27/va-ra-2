@@ -36,17 +36,30 @@ export default function Navbar() {
             </Link>
 
             <div className="hidden md:flex items-center gap-1">
-              <div className="relative">
-                <button className="relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 flex items-center gap-1 text-slate-400 hover:text-white">
+              <div className="relative group">
+                <button className="relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 flex items-center gap-1 text-slate-400 group-hover:text-white">
                   Explore
-                  <ChevronDown className="w-4 h-4 transition-transform " />
+                  <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
                 </button>
+                <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                  <div className="bg-[#0f172a] border border-white/10 rounded-xl shadow-xl w-48 overflow-hidden py-2">
+                    <Link href="/journals" className="block px-4 py-2 text-sm text-slate-300 hover:bg-white/5 hover:text-white transition-colors">Journals</Link>
+                    <Link href="/news" className="block px-4 py-2 text-sm text-slate-300 hover:bg-white/5 hover:text-white transition-colors">News</Link>
+                    <Link href="/conferences" className="block px-4 py-2 text-sm text-slate-300 hover:bg-white/5 hover:text-white transition-colors">Conferences</Link>
+                  </div>
+                </div>
               </div>
-              <div className="relative">
-                <button className="relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 flex items-center gap-1 text-slate-400 hover:text-white">
+              <div className="relative group">
+                <button className="relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 flex items-center gap-1 text-slate-400 group-hover:text-white">
                   Resources
-                  <ChevronDown className="w-4 h-4 transition-transform " />
+                  <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
                 </button>
+                <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                  <div className="bg-[#0f172a] border border-white/10 rounded-xl shadow-xl w-48 overflow-hidden py-2">
+                    <Link href="/tools" className="block px-4 py-2 text-sm text-slate-300 hover:bg-white/5 hover:text-white transition-colors">AI Tools</Link>
+                    <Link href="/ebooks" className="block px-4 py-2 text-sm text-slate-300 hover:bg-white/5 hover:text-white transition-colors">E-Books</Link>
+                  </div>
+                </div>
               </div>
               <Link
                 className="relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 text-slate-400 hover:text-white"
@@ -60,11 +73,17 @@ export default function Navbar() {
               >
                 <span className="relative z-10">About</span>
               </Link>
-              <div className="relative">
-                <button className="relative px-4 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white transition-all duration-300 flex items-center gap-1">
+              <div className="relative group">
+                <button className="relative px-4 py-2 rounded-lg text-sm font-medium text-slate-400 group-hover:text-white transition-all duration-300 flex items-center gap-1">
                   Policy
-                  <ChevronDown className="w-4 h-4 transition-transform " />
+                  <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
                 </button>
+                <div className="absolute top-full right-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                  <div className="bg-[#0f172a] border border-white/10 rounded-xl shadow-xl w-48 overflow-hidden py-2">
+                    <span className="block px-4 py-2 text-sm text-slate-500 cursor-not-allowed">Privacy Policy</span>
+                    <span className="block px-4 py-2 text-sm text-slate-500 cursor-not-allowed">Terms of Service</span>
+                  </div>
+                </div>
               </div>
             </div>
 
