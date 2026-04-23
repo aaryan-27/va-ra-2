@@ -1,26 +1,183 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", "Inter", sans-serif;
+
+  --color-vara-700: #111827;
+  --color-vara-800: #0a0f1e;
+  --color-vara-900: #060a14;
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-float-delayed: float 6s ease-in-out 2s infinite;
+  --animate-float-slow: float 8s ease-in-out 1s infinite;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-primary: #fffcf7;
+  --bg-secondary: #fef9f0;
+  --bg-tertiary: #fdf3e3;
+  --text-primary: #1c1412;
+  --text-secondary: #44322a;
+  --text-muted: #7a6558;
+  --accent-amber: #d97706;
+  --accent-rose: #e11d48;
+  --accent-purple: #7c3aed;
+  --accent-emerald: #059669;
+  --glass-bg: rgba(120, 70, 20, 0.03);
+  --glass-border: rgba(120, 70, 20, 0.1);
+  --overlay-bg: rgba(120, 70, 20, 0.03);
+  --overlay-bg-hover: rgba(120, 70, 20, 0.06);
+  --shadow-color: rgba(80, 40, 10, 0.08);
+  --grid-line: rgba(120, 70, 20, 0.05);
+  --dot-color: rgba(120, 70, 20, 0.07);
+  --scrollbar-color: rgba(217, 119, 6, 0.3);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark {
+  --bg-primary: #060a14;
+  --bg-secondary: #0a0f1e;
+  --bg-tertiary: #111827;
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --glass-bg: hsla(0, 0%, 100%, 0.03);
+  --glass-border: hsla(0, 0%, 100%, 0.08);
+  --overlay-bg: hsla(0, 0%, 100%, 0.03);
+  --overlay-bg-hover: hsla(0, 0%, 100%, 0.06);
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --grid-line: hsla(0, 0%, 100%, 0.03);
+  --dot-color: hsla(0, 0%, 100%, 0.07);
+  --scrollbar-color: rgba(139, 92, 246, 0.3);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.bg-grid {
+  background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.bg-dots {
+  background-image: radial-gradient(var(--dot-color) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+.mesh-gradient {
+  background: radial-gradient(at 20% 20%, rgba(245, 158, 11, 0.15) 0, transparent 50%),
+    radial-gradient(at 80% 20%, rgba(139, 92, 246, 0.12) 0, transparent 50%),
+    radial-gradient(at 50% 80%, rgba(244, 63, 94, 0.1) 0, transparent 50%),
+    radial-gradient(at 80% 80%, rgba(16, 185, 129, 0.08) 0, transparent 50%);
+}
+
+.glass-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  border-width: 1px;
+  backdrop-filter: blur(24px);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--glass-bg);
+  border-color: var(--glass-border);
+}
+
+.glass-card:hover {
+  background: var(--overlay-bg-hover);
+  border-color: var(--glass-border);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px var(--shadow-color), 0 0 40px rgba(245, 158, 11, 0.1);
+}
+
+.gradient-text {
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(135deg, #f59e0b, #8b5cf6, #f43f5e);
+}
+
+.section-container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 80rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .section-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.section-padding {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  padding: 1rem 2rem;
+  font-weight: 600;
+  color: #ffffff;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(135deg, #f59e0b, #8b5cf6);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(245, 158, 11, 0.3);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  border-width: 1px;
+  padding: 1rem 2rem;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--text-primary);
+  background: var(--overlay-bg);
+  border-color: var(--glass-border);
+}
+
+.btn-secondary:hover {
+  background: var(--overlay-bg-hover);
+}
+
+/* Utilities for colors */
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-muted { color: var(--text-muted); }
