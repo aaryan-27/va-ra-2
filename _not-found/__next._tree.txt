@@ -1,0 +1,2 @@
+:HL["/va-ra-2/_next/static/chunks/0ub9b9p4qd7p0.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"nAm-pRso7Nr3U8zvBpkJR"}
